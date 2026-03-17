@@ -3,76 +3,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Datenschutzerklärung – Gravity Roll</title>
+    <title>Datenschutzerklärung / Privacy Policy – Gravity Roll</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #0d1117; color: rgba(255,255,255,.85);
-            line-height: 1.8; padding: 24px 16px; max-width: 720px; margin: 0 auto;
-        }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0d1117; color: rgba(255,255,255,.85); line-height: 1.8; padding: 24px 16px; max-width: 720px; margin: 0 auto; }
         h1 { font-size: 1.6rem; color: #ffd866; margin-bottom: 8px; }
-        .app-name { font-size: .85rem; color: rgba(255,255,255,.4); margin-bottom: 32px; }
+        .app-name { font-size: .85rem; color: rgba(255,255,255,.4); margin-bottom: 16px; }
         h2 { font-size: 1rem; color: rgba(255,255,255,.9); margin: 28px 0 8px; }
         p { font-size: .9rem; color: rgba(255,255,255,.65); margin-bottom: 12px; }
         a { color: #ffd866; text-decoration: none; }
         a:hover { text-decoration: underline; }
         .date { font-style: italic; color: rgba(255,255,255,.35); margin-top: 32px; font-size: .85rem; }
-        .footer { margin-top: 48px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.08); text-align: center; }
-        .footer a { font-size: .8rem; color: rgba(255,255,255,.3); }
+        .footer { margin-top: 48px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,.08); text-align: center; font-size: .8rem; color: rgba(255,255,255,.3); }
+        .lang-toggle { display: flex; gap: 0; margin-bottom: 28px; border-radius: 8px; overflow: hidden; border: 1px solid rgba(255,255,255,.1); width: fit-content; }
+        .lang-btn { font-family: inherit; font-size: .8rem; font-weight: 600; padding: 8px 20px; border: none; cursor: pointer; background: rgba(255,255,255,.04); color: rgba(255,255,255,.4); transition: all .2s; }
+        .lang-btn.active { background: rgba(255,216,102,.12); color: #ffd866; }
+        .lang-section { display: none; }
+        .lang-section.active { display: block; }
     </style>
 </head>
 <body>
-
-<h1>Datenschutzerklärung</h1>
+<h1 id="pageTitle">Datenschutzerklärung</h1>
 <p class="app-name">Gravity Roll – Android App</p>
+<nav class="lang-toggle">
+    <button class="lang-btn active" onclick="switchLang('de')">🇩🇪 Deutsch</button>
+    <button class="lang-btn" onclick="switchLang('en')">🇬🇧 English</button>
+</nav>
 
+<div class="lang-section active" id="lang-de">
 <h2>1. Datenschutz auf einen Blick</h2>
 <p>Die folgende Datenschutzerklärung gibt Ihnen einen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie die App „Gravity Roll" nutzen.</p>
-
 <h2>2. Verantwortlicher</h2>
-<p>Sascha Becker<br>
-Am Beek 22<br>
-21255 Tostedt<br>
-Deutschland<br>
-E-Mail: <a href="mailto:SB-MobileApps@protonmail.com">SB-MobileApps@protonmail.com</a><br>
-Telefon: +49 159 06785864</p>
-
+<p>Sascha Becker<br>Am Beek 22<br>21255 Tostedt<br>Deutschland<br>E-Mail: SB-MobileApps@protonmail.com<br>Telefon: +49 159 06785864</p>
 <h2>3. Datenerfassung in dieser App</h2>
 <p>Diese App speichert Spielstände, Einstellungen und Fortschritt ausschließlich lokal auf Ihrem Gerät (localStorage). Es werden keine personenbezogenen Daten an unsere Server übertragen.</p>
-
 <h2>4. Werbung</h2>
 <p>Diese App kann Werbung von Drittanbietern anzeigen. Hierzu wird ein Werbe-SDK (z.B. Google AdMob) eingesetzt, das folgende Daten erheben kann:</p>
-<p>– Werbe-ID Ihres Geräts (kann in den Geräteeinstellungen zurückgesetzt werden)<br>
-– Ungefährer Standort (auf Basis der IP-Adresse)<br>
-– Geräte- und App-Informationen (Gerätetyp, Betriebssystem, App-Version)<br>
-– Interaktionsdaten mit Werbeanzeigen (Klicks, Impressionen)</p>
-<p>Diese Daten werden von Google gemäß deren Datenschutzbestimmungen verarbeitet. Weitere Informationen finden Sie unter: <a href="https://policies.google.com/privacy" target="_blank">policies.google.com/privacy</a></p>
+<p>– Werbe-ID Ihres Geräts (kann in den Geräteeinstellungen zurückgesetzt werden)<br>– Ungefährer Standort (auf Basis der IP-Adresse)<br>– Geräte- und App-Informationen (Gerätetyp, Betriebssystem, App-Version)<br>– Interaktionsdaten mit Werbeanzeigen (Klicks, Impressionen)</p>
+<p>Diese Daten werden von Google gemäß deren Datenschutzbestimmungen verarbeitet: <a href="https://policies.google.com/privacy" target="_blank">policies.google.com/privacy</a></p>
 <p>Sie können personalisierte Werbung in den Einstellungen Ihres Geräts unter „Werbung" deaktivieren.</p>
-
 <h2>5. Analyse-Tools</h2>
-<p>Diese App kann Google Firebase Analytics verwenden, um anonymisierte Nutzungsstatistiken zu erheben (z.B. Anzahl der Spielsitzungen, erreichte Level). Diese Daten enthalten keine personenbezogenen Informationen und dienen ausschließlich der Verbesserung der App.</p>
-
+<p>Diese App kann Google Firebase Analytics verwenden, um anonymisierte Nutzungsstatistiken zu erheben. Diese Daten enthalten keine personenbezogenen Informationen und dienen ausschließlich der Verbesserung der App.</p>
 <h2>6. Berechtigungen</h2>
-<p>Diese App kann folgende Berechtigungen anfordern:<br>
-– Internet-Zugang (für Werbeanzeigen und optionale Updates)<br>
-– Vibration (für haptisches Feedback während des Spiels)<br>
-– Netzwerkstatus (zur Prüfung der Internetverbindung)</p>
-
+<p>– Internet-Zugang (für Werbeanzeigen und optionale Updates)<br>– Vibration (für haptisches Feedback während des Spiels)<br>– Netzwerkstatus (zur Prüfung der Internetverbindung)</p>
 <h2>7. Datenschutz von Kindern</h2>
 <p>Diese App richtet sich nicht gezielt an Kinder unter 13 Jahren. Sollten wir feststellen, dass personenbezogene Daten von Kindern unter 13 Jahren ohne Zustimmung der Eltern erhoben wurden, werden wir diese umgehend löschen.</p>
-
 <h2>8. Ihre Rechte</h2>
-<p>Sie haben jederzeit das Recht auf Auskunft, Berichtigung, Löschung und Einschränkung der Verarbeitung Ihrer Daten. Lokale Spieldaten können Sie jederzeit durch Löschen der App-Daten oder Deinstallation entfernen. Die Werbe-ID können Sie in Ihren Geräteeinstellungen zurücksetzen. Kontakt: <a href="mailto:SB-MobileApps@protonmail.com">SB-MobileApps@protonmail.com</a></p>
-
+<p>Sie haben jederzeit das Recht auf Auskunft, Berichtigung, Löschung und Einschränkung der Verarbeitung Ihrer Daten. Lokale Spieldaten können Sie jederzeit durch Löschen der App-Daten oder Deinstallation entfernen. Kontakt: SB-MobileApps@protonmail.com</p>
 <h2>9. Änderungen</h2>
 <p>Diese Datenschutzerklärung kann gelegentlich aktualisiert werden. Die aktuelle Version finden Sie stets in der App und auf dieser Seite.</p>
-
 <p class="date">Stand: 16.03.2026</p>
-
-<div class="footer">
-    <a href="mailto:SB-MobileApps@protonmail.com">Kontakt: SB-MobileApps@protonmail.com</a>
 </div>
 
+<div class="lang-section" id="lang-en">
+<h2>1. Privacy at a Glance</h2>
+<p>The following privacy policy provides an overview of what happens to your personal data when you use the app "Gravity Roll".</p>
+<h2>2. Data Controller</h2>
+<p>Sascha Becker<br>Am Beek 22<br>21255 Tostedt<br>Germany<br>Email: SB-MobileApps@protonmail.com<br>Phone: +49 159 06785864</p>
+<h2>3. Data Collection in This App</h2>
+<p>This app stores game progress, settings and achievements exclusively on your device (localStorage). No personal data is transmitted to our servers.</p>
+<h2>4. Advertising</h2>
+<p>This app may display advertising from third-party providers. An advertising SDK (e.g. Google AdMob) is used, which may collect the following data:</p>
+<p>– Your device's advertising ID (can be reset in device settings)<br>– Approximate location (based on IP address)<br>– Device and app information (device type, operating system, app version)<br>– Interaction data with advertisements (clicks, impressions)</p>
+<p>This data is processed by Google in accordance with their privacy policy: <a href="https://policies.google.com/privacy" target="_blank">policies.google.com/privacy</a></p>
+<p>You can disable personalized advertising in your device settings under "Advertising".</p>
+<h2>5. Analytics</h2>
+<p>This app may use Google Firebase Analytics to collect anonymized usage statistics. This data does not contain personal information and is used solely to improve the app.</p>
+<h2>6. Permissions</h2>
+<p>– Internet access (for advertisements and optional updates)<br>– Vibration (for haptic feedback during gameplay)<br>– Network status (to check internet connectivity)</p>
+<h2>7. Children's Privacy</h2>
+<p>This app is not specifically targeted at children under the age of 13. If we become aware that personal data has been collected from children under 13 without parental consent, we will delete it immediately.</p>
+<h2>8. Your Rights</h2>
+<p>You have the right to access, correct, delete and restrict the processing of your data at any time. You can delete local game data by clearing the app data or uninstalling the app. Contact: SB-MobileApps@protonmail.com</p>
+<h2>9. Changes</h2>
+<p>This privacy policy may be updated from time to time. The current version is always available within the app and on this page.</p>
+<p class="date">Last updated: March 16, 2026</p>
+</div>
+
+<div class="footer">Kontakt / Contact: SB-MobileApps@protonmail.com</div>
+<script>
+function switchLang(lang) {
+    document.querySelectorAll('.lang-section').forEach(function(el) { el.classList.remove('active'); });
+    document.querySelectorAll('.lang-btn').forEach(function(el) { el.classList.remove('active'); });
+    document.getElementById('lang-' + lang).classList.add('active');
+    document.querySelectorAll('.lang-btn').forEach(function(btn) {
+        if ((lang === 'de' && btn.textContent.indexOf('Deutsch') >= 0) || (lang === 'en' && btn.textContent.indexOf('English') >= 0)) btn.classList.add('active');
+    });
+    document.getElementById('pageTitle').textContent = lang === 'de' ? 'Datenschutzerklärung' : 'Privacy Policy';
+    document.documentElement.lang = lang;
+}
+</script>
 </body>
 </html>
