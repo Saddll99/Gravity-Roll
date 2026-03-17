@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#0a0c10">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="screen-orientation" content="portrait">
+    <title>GRAVITY ROLL</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800;900&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<body>
+
+<main id="gameContainer">
+
+    <canvas id="gameCanvas"></canvas>
+
+    <!-- ===== HUD ===== -->
+    <header id="hud">
+        <span class="hud-pill"><span class="icon">●</span> <span id="score">0</span></span>
+        <span class="hud-pill" style="pointer-events:none"><span class="icon">♛</span> <span id="highScore">0</span></span>
+    </header>
+
+    <output id="levelBadge">LEVEL 1</output>
+    <button id="pauseBtn">❚❚</button>
+
+    <!-- ===== Power-Up Indicators ===== -->
+    <aside id="powerUpBar">
+        <figure class="pu-indicator pu-slow" id="puSlowInd">
+            <span class="pu-icon">❄</span>
+            <figcaption class="pu-text"><span class="pu-label">SLOW</span><span class="pu-timer" id="puSlowTimer">4s</span></figcaption>
+        </figure>
+        <figure class="pu-indicator pu-fast" id="puFastInd">
+            <span class="pu-icon">🔥</span>
+            <figcaption class="pu-text"><span class="pu-label">FAST</span><span class="pu-timer" id="puFastTimer">4s</span></figcaption>
+        </figure>
+        <figure class="pu-indicator pu-double" id="puDblInd">
+            <span class="pu-icon">×2</span>
+            <figcaption class="pu-text"><span class="pu-label">×2</span><span class="pu-timer" id="puDblTimer">4s</span></figcaption>
+        </figure>
+    </aside>
+
+    <output id="godBadge">⚙ GOD MODE</output>
+    <output id="fpsBadge"></output>
+
+    <!-- ===== PAUSE SCREEN ===== -->
+    <section id="pauseScreen" class="overlay">
+        <h2 class="pause-title" id="pauseTitle">PAUSE</h2>
+        <nav class="pause-btns">
+            <button class="pause-btn" id="resumeBtn">WEITER</button>
+            <button class="pause-btn" id="menuBtn">HAUPTMENÜ</button>
+        </nav>
+        <section class="pause-settings">
+            <label class="ps-row"><span id="pauseVolLabel">Lautstärke</span><input type="range" id="pauseVol" min="0" max="100" value="70"></label>
+            <label class="ps-row"><span id="pauseGodLabel">God Mode</span><button class="toggle" id="pauseGod"></button></label>
+        </section>
+    </section>
+
+    <!-- ===== START SCREEN ===== -->
+    <section id="startScreen" class="overlay">
+
+        <h1 class="logo-text">GRAVITY ROLL</h1>
+        <p class="logo-sub" id="logoSub">Das Schwerkraft-Spiel</p>
+        <p class="gem-bar"><span class="gem-icon">💎</span><span class="gem-count" id="gemCount">0</span></p>
+
+        <nav class="tab-bar">
+            <button class="tab-btn active" data-tab="play" id="tabPlay">Spielen</button>
+            <button class="tab-btn" data-tab="shop" id="tabShop">Shop</button>
+            <button class="tab-btn" data-tab="achievements" id="tabAch">Erfolge</button>
+            <button class="tab-btn" data-tab="stats" id="tabStats">Stats</button>
+            <button class="tab-btn" data-tab="settings">⚙</button>
+        </nav>
+
+        <!-- Tab: Play -->
+        <article class="tab-content active" id="tab-play">
+            <button id="startBtn" class="main-btn">START</button>
+            <p class="how-to" id="howTo">
+                <span class="key">TIPPEN</span> wechselt die Schwerkraft<br>
+                Weiche den Wänden aus &amp; sammle Items<br>
+                Je weiter du kommst, desto schneller wird es
+            </p>
+        </article>
+
+        <!-- Tab: Shop -->
+        <article class="tab-content" id="tab-shop">
+            <section class="shop-scroll" id="shopScroll"></section>
+        </article>
+
+        <!-- Tab: Achievements -->
+        <article class="tab-content" id="tab-achievements">
+            <section class="ach-grid" id="achGrid"></section>
+        </article>
+
+        <!-- Tab: Statistics -->
+        <article class="tab-content" id="tab-stats">
+            <section class="stats-grid" id="statsGrid"></section>
+        </article>
+
+        <!-- Tab: Settings -->
+        <article class="tab-content" id="tab-settings">
+            <section class="settings-group">
+                <div class="settings-section-title" id="settSectionGeneral">ALLGEMEIN</div>
+                <label class="setting-row">
+                    <span class="setting-label"><span class="setting-icon">🌐</span> <span id="langLabel">Sprache</span></span>
+                    <span class="setting-control">
+                        <select id="langSelect"></select>
+                        <div class="custom-lang-wrap">
+                            <div class="custom-lang-btn" id="langBtn">Deutsch</div>
+                            <div class="custom-lang-list" id="langList"></div>
+                        </div>
+                    </span>
+                </label>
+
+                <div class="settings-section-title" id="settSectionAudio">AUDIO</div>
+                <label class="setting-row">
+                    <span class="setting-label"><span class="setting-icon">🔊</span> <span id="volLabel">Lautstärke</span></span>
+                    <span class="setting-control"><input type="range" id="volSlider" min="0" max="100" value="70"><span class="vol-val" id="volVal">70%</span></span>
+                </label>
+                <label class="setting-row">
+                    <span class="setting-label"><span class="setting-icon">🎵</span> <span id="musicLabel">Musik</span></span>
+                    <button class="toggle" id="musicToggle"></button>
+                </label>
+
+                <div class="settings-section-title" id="settSectionHaptics">HAPTIK</div>
+                <label class="setting-row">
+                    <span class="setting-label"><span class="setting-icon">📳</span> <span id="vibLabel">Vibration</span></span>
+                    <button class="toggle on" id="vibToggle"></button>
+                </label>
+
+                <div class="settings-section-title" id="settSectionDev">ENTWICKLER</div>
+                <label class="setting-row">
+                    <span class="setting-label"><span class="setting-icon">⚡</span> <span id="godLabel">God Mode</span></span>
+                    <button class="toggle" id="godToggle"></button>
+                </label>
+                <small class="setting-hint" id="godHint">Unverwundbar – zum Testen</small>
+
+                <button class="reset-btn" id="resetBtn">⚠ ALLE DATEN ZURÜCKSETZEN</button>
+            </section>
+        </article>
+
+    </section>
+
+    <!-- ===== GAME OVER ===== -->
+    <section id="gameOverScreen" class="overlay">
+        <h2 class="go-title" id="goTitle">GAME OVER</h2>
+        <small class="go-score-label" id="goScoreLabel">SCORE</small>
+        <output class="go-score" id="finalScore">0</output>
+        <output class="go-best" id="bestDisplay">BEST: 0</output>
+        <output id="newHigh"></output>
+        <p class="go-gems">💎 +<span id="goGems">0</span> <span id="goEarned">verdient</span></p>
+        <section class="go-stats">
+            <figure class="go-stat"><output class="go-stat-val" id="goLevel">1</output><figcaption class="go-stat-label" id="goLevelLabel">Level</figcaption></figure>
+            <figure class="go-stat"><output class="go-stat-val" id="goItems">0</output><figcaption class="go-stat-label" id="goItemsLabel">Items</figcaption></figure>
+        </section>
+        <button class="go-share" id="shareBtn">📤 <span id="shareText">Score teilen</span></button>
+        <button id="extraLifeBtn">
+            <span class="el-icon">🎬</span>
+            <span class="el-text"><span class="el-main" id="elMainText">WEITERLEBEN</span><span class="el-sub" id="elSubText">Werbung ansehen</span></span>
+        </button>
+        <nav class="go-btns">
+            <button class="go-btn" id="restartBtn">NOCHMAL</button>
+            <button class="go-btn" id="goMenuBtn">MENÜ</button>
+        </nav>
+    </section>
+
+    <!-- Ad Loading Overlay -->
+    <div class="ad-loading" id="adLoading">
+        <div class="ad-loading-text" id="adLoadingText">Werbung wird geladen...</div>
+    </div>
+
+    <output id="readyText">TIPPEN ZUM STARTEN</output>
+    <output id="levelUpFlash"><span class="level-up-text" id="levelUpText"></span></output>
+    <output id="achToast"><span class="toast-icon" id="toastIcon">🏆</span><span class="toast-text" id="toastText"></span></output>
+
+    <!-- ===== LEGAL FOOTER ===== -->
+    <footer id="legalFooter">
+        <a href="#" id="openImpressum">Impressum</a>
+        <span class="sep">|</span>
+        <a href="#" id="openDatenschutz">Datenschutz</a>
+    </footer>
+
+    <!-- ===== IMPRESSUM MODAL ===== -->
+    <section class="legal-modal" id="impressumModal">
+        <header class="legal-header">
+            <h2>Impressum</h2>
+            <button class="legal-close" id="closeImpressum">✕</button>
+        </header>
+        <div class="legal-body">
+            <h3>Angaben gemäß § 5 TMG</h3>
+            <p>Sascha Becker<br>Am Beek 22<br>21255 Tostedt<br>Deutschland</p>
+            <h3>Kontakt</h3>
+            <p>E-Mail: SB-MobileApps@protonmail.com<br>Telefon: +49 159 06785864</p>
+            <h3>Verantwortlich für den Inhalt gemäß § 55 Abs. 2 RStV</h3>
+            <p>Sascha Becker<br>Am Beek 22<br>21255 Tostedt</p>
+            <h3>Haftungsausschluss</h3>
+            <p>Trotz sorgfältiger inhaltlicher Kontrolle übernehmen wir keine Haftung für die Inhalte externer Links. Für den Inhalt der verlinkten Seiten sind ausschließlich deren Betreiber verantwortlich.</p>
+            <h3>Urheberrecht</h3>
+            <p>Die durch den Betreiber dieser App erstellten Inhalte und Werke unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des Autors.</p>
+        </div>
+    </section>
+
+    <!-- ===== DATENSCHUTZERKLÄRUNG MODAL ===== -->
+    <section class="legal-modal" id="datenschutzModal">
+        <header class="legal-header">
+            <h2>Datenschutz</h2>
+            <button class="legal-close" id="closeDatenschutz">✕</button>
+        </header>
+        <div class="legal-body">
+            <h3>1. Datenschutz auf einen Blick</h3>
+            <p>Die folgende Datenschutzerklärung gibt Ihnen einen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese App nutzen.</p>
+            <h3>2. Verantwortlicher</h3>
+            <p>Sascha Becker<br>Am Beek 22<br>21255 Tostedt<br>Deutschland<br>E-Mail: SB-MobileApps@protonmail.com<br>Telefon: +49 159 06785864</p>
+            <h3>3. Datenerfassung in dieser App</h3>
+            <p>Diese App speichert Spielstände, Einstellungen und Fortschritt ausschließlich lokal auf Ihrem Gerät (localStorage). Es werden keine personenbezogenen Daten an unsere Server übertragen.</p>
+            <h3>4. Werbung</h3>
+            <p>Diese App kann Werbung von Drittanbietern anzeigen. Hierzu wird ein Werbe-SDK (z.B. Google AdMob) eingesetzt, das folgende Daten erheben kann:</p>
+            <p>– Werbe-ID Ihres Geräts (kann in den Geräteeinstellungen zurückgesetzt werden)<br>– Ungefährer Standort (auf Basis der IP-Adresse)<br>– Geräte- und App-Informationen (Gerätetyp, Betriebssystem, App-Version)<br>– Interaktionsdaten mit Werbeanzeigen (Klicks, Impressionen)</p>
+            <p>Diese Daten werden von Google gemäß deren Datenschutzbestimmungen verarbeitet. Weitere Informationen: <a href="https://policies.google.com/privacy">policies.google.com/privacy</a></p>
+            <p>Sie können personalisierte Werbung in den Einstellungen Ihres Geräts unter „Werbung“ deaktivieren.</p>
+            <h3>5. Analyse-Tools</h3>
+            <p>Diese App kann Google Firebase Analytics verwenden, um anonymisierte Nutzungsstatistiken zu erheben (z.B. Anzahl der Spielsitzungen, erreichte Level). Diese Daten enthalten keine personenbezogenen Informationen und dienen ausschließlich der Verbesserung der App.</p>
+            <h3>6. Berechtigungen</h3>
+            <p>– Internet-Zugang (für Werbeanzeigen und optionale Updates)<br>– Vibration (für haptisches Feedback während des Spiels)<br>– Netzwerkstatus (zur Prüfung der Internetverbindung)</p>
+            <h3>7. Datenschutz von Kindern</h3>
+            <p>Diese App richtet sich nicht gezielt an Kinder unter 13 Jahren. Sollten wir feststellen, dass personenbezogene Daten von Kindern unter 13 Jahren ohne Zustimmung der Eltern erhoben wurden, werden wir diese umgehend löschen.</p>
+            <h3>8. Ihre Rechte</h3>
+            <p>Sie haben jederzeit das Recht auf Auskunft, Berichtigung, Löschung und Einschränkung der Verarbeitung Ihrer Daten. Lokale Spieldaten können Sie jederzeit durch Löschen der App-Daten oder Deinstallation entfernen. Kontakt: SB-MobileApps@protonmail.com</p>
+            <h3>9. Änderungen</h3>
+            <p>Diese Datenschutzerklärung kann gelegentlich aktualisiert werden. Die aktuelle Version finden Sie stets in der App.</p>
+            <p><em>Stand: 16.03.2026</em></p>
+        </div>
+    </section>
+
+</main>
+
+<!-- ===== SCRIPTS ===== -->
+
+
+
+
+
+<!-- ===== SCRIPTS (loaded in dependency order) ===== -->
+
+<!-- 1. Native bridge: Capacitor, fullscreen, status bar -->
+<script src="js/native.js"></script>
+
+<!-- 2. Language strings (all 9 languages) -->
+<script src="js/lang.js"></script>
+
+<!-- 3. Constants, scaling, DOM references -->
+<script src="js/config.js"></script>
+
+<!-- 4. Audio: sound effects, music, volume control -->
+<script src="js/audio.js"></script>
+
+<!-- 5. Ad system: interstitial & rewarded ads -->
+<script src="js/ads.js"></script>
+
+<!-- 6. Shop: skins, gems, purchases -->
+<script src="js/shop.js"></script>
+
+<!-- 7. Statistics & achievements -->
+<script src="js/stats.js"></script>
+
+<!-- 8. Game state & power-up system -->
+<script src="js/powerups.js"></script>
+
+<!-- 9. Physics: ball movement, wall collision -->
+<script src="js/physics.js"></script>
+
+<!-- 10. Rendering: canvas drawing, backgrounds, themes -->
+<script src="js/render.js"></script>
+
+<!-- 11. Game lifecycle, input, game loop -->
+<script src="js/game.js"></script>
+
+<!-- 12. Legal: Impressum & Datenschutz modals -->
+<script src="js/legal.js"></script>
+
+</body>
+</html>
