@@ -11,12 +11,8 @@
     <title>GRAVITY ROLL</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800;900&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
-    
-    <!-- Styles -->
     <link rel="stylesheet" href="css/styles.css">
 </head>
-<body>
-
 <body>
 
 <main id="gameContainer">
@@ -246,44 +242,35 @@
 
 
 
+<!-- ================================================================
+     GRAVITY ROLL — Scripts (loaded in dependency order)
+     
+     Each file is one self-contained section. To edit:
+       - Skin prices     → 07-shop.js (search BALL_SKINS)
+       - Ad IDs          → 06-ads.js (search AD_CONFIG)
+       - Gem earning     → 11-physics.js (search addGems)
+       - Difficulty      → 03-config.js (search getDiff)
+       - Sound effects   → 05-audio.js
+       - Achievements    → 08-stats.js
+     ================================================================ -->
+<script src="js/01-native.js"></script>
+<script src="js/02-lang.js"></script>
+<script src="js/03-config.js"></script>
+<script src="js/04-dom.js"></script>
+<script src="js/05-audio.js"></script>
+<script src="js/06-ads.js"></script>
+<script src="js/07-shop.js"></script>
+<script src="js/08-stats.js"></script>
+<script src="js/09-gamestate.js"></script>
+<script src="js/10-powerups.js"></script>
+<script src="js/11-physics.js"></script>
+<script src="js/12-render.js"></script>
+<script src="js/13-lifecycle.js"></script>
+<script src="js/14-input.js"></script>
+<script src="js/15-loop.js"></script>
+<script src="js/16-legal.js"></script>
 
-<!-- ===== SCRIPTS (loaded in dependency order) ===== -->
-
-<!-- 1. Native bridge: Capacitor, fullscreen, status bar -->
-<script src="js/native.js"></script>
-
-<!-- 2. Language strings (all 9 languages) -->
-<script src="js/lang.js"></script>
-
-<!-- 3. Constants, scaling, DOM references -->
-<script src="js/config.js"></script>
-
-<!-- 4. Audio: sound effects, music, volume control -->
-<script src="js/audio.js"></script>
-
-<!-- 5. Ad system: interstitial & rewarded ads -->
-<script src="js/ads.js"></script>
-
-<!-- 6. Shop: skins, gems, purchases -->
-<script src="js/shop.js"></script>
-
-<!-- 7. Statistics & achievements -->
-<script src="js/stats.js"></script>
-
-<!-- 8. Game state & power-up system -->
-<script src="js/powerups.js"></script>
-
-<!-- 9. Physics: ball movement, wall collision -->
-<script src="js/physics.js"></script>
-
-<!-- 10. Rendering: canvas drawing, backgrounds, themes -->
-<script src="js/render.js"></script>
-
-<!-- 11. Game lifecycle, input, game loop -->
-<script src="js/game.js"></script>
-
-<!-- 12. Legal: Impressum & Datenschutz modals -->
-<script src="js/legal.js"></script>
-
+<!-- 99. Initialization (must load LAST) -->
+<script src="js/99-init.js"></script>
 </body>
 </html>
